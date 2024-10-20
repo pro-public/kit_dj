@@ -1,9 +1,15 @@
+import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from dotenv import load_dotenv
+from tqdm import tqdm
 
-# Tus credenciales de Spotify (las obtienes al crear la app en Spotify Developer)
-client_id = "TU_CLIENT_ID"
-client_secret = "TU_CLIENT_SECRET"
+# Cargar variables desde el archivo .env
+load_dotenv()
+
+# Obtener las credenciales desde las variables de entorno
+client_id = os.getenv('SPOTIPY_CLIENT_ID')
+client_secret = os.getenv('SPOTIPY_CLIENT_SECRET')
 
 # Configurar autenticación con la API de Spotify
 auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
@@ -25,14 +31,17 @@ def buscar_en_spotify(tema, artista):
 with open(archivo, "r", encoding="utf-8") as file:
     lineas = file.readlines()
 
-# Reescribir el archivo con las URLs de Spotify
-with open(archivo, "w", encoding="utf-8") as file:
-    for linea in lineas:
-        linea = linea.strip()
-        if "-" in linea:
-            tema, artista = linea.split(" - ", 1)
-            url_spotify = buscar_en_spotify(tema, artista)
-            file.write(f"{tema} - {artista} - {url_spotify}\n")
-        else:
-            file.write(f"{linea} - formato incorrecto\n")
-
+# Crear barra de progreso
+with tqdm(total=len(lineas), desc="Procesando temas", unit="tema") as pbar:
+    # Reescribir el archivo con las URLs de Spotify
+    with open(archivo, "w", encoding="utf-8") as file:
+        for linea in lineas:
+            linea = linea.strip()
+            if "-" in linea:
+                tema, artista = linea.split(" - ", 1)
+                url_spotify = buscar_en_spotify(tema, artista)
+                file.write(f"{tema} - {artista} - {url_spotify}\n")
+            else:
+                file.write(f"{linea} - formato incorrecto\n")
+            # Actualizar barra de progreso
+            pbar.update(1)
