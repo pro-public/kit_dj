@@ -16,7 +16,7 @@ auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=clien
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 # Nombre del archivo de entrada/salida
-archivo = "this.txt"
+archivo = "data/this.txt"
 
 def buscar_en_spotify(tema, artista):
     query = f"{tema} {artista}"

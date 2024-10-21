@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 # Ruta del archivo NML
-file_path = 'this.nml'
+file_path = 'data/this.nml'
 
 # Función para extraer el título y el artista de cada track y guardarlos en un archivo .txt
 def extract_tracks_to_txt(nml_file, output_file):
@@ -21,7 +21,7 @@ def extract_tracks_to_txt(nml_file, output_file):
                 f_out.write(f"{title} - {artist}\n")
 
 # Definir la ruta del archivo de salida
-output_file = 'this.txt'
+output_file = 'data/this.txt'
 
 # Ejecutar la función para extraer y guardar los datos
 extract_tracks_to_txt(file_path, output_file)

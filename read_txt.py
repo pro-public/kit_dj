@@ -1,5 +1,5 @@
 # Nombre del archivo
-archivo = "this.txt"
+archivo = "data/this.txt"
 
 # Abrir el archivo y procesar cada línea
 with open(archivo, "r", encoding="utf-8") as file:
