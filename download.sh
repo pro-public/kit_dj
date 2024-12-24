@@ -4,9 +4,9 @@ echo "Chequeo de pre requisitos (librerias de python)"
 # Comprobar si existe the archivo this.txt
 if [ -f "data/this.txt" ]; then
     rm data/this.txt
-    python3 nml-to-txt.py
+    python3 conv_nml-to-txt.py
 else
-    python3 nml-to-txt.py
+    python3 conv_nml-to-txt.py
 fi
 echo "Contenido del archivo this.txt"
 python3 read_txt.py ; sleep 2

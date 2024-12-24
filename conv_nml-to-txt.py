@@ -15,7 +15,7 @@ def extract_tracks_to_txt(nml_file, output_file):
         for entry in root.findall(".//ENTRY"):
             title = entry.get('TITLE')
             artist = entry.get('ARTIST')
-            
+
             # Verificar si ambos valores existen y escribirlos en el archivo
             if title and artist:
                 f_out.write(f"{title} - {artist}\n")
